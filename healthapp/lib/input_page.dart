@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthapp/cards.dart';
+import 'package:healthapp/card_content.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 const bottomContainerColor = Color(0xFFEB1555);
@@ -20,13 +22,27 @@ class _InputPageState extends State<InputPage> {
         ),
         body: Column(
           children: <Widget>[
-            const Expanded(
+            Expanded(
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: activeCardColour),
+                  child: GestureDetector(
+                    onTap: () {
+                      print("Male card was tapped");
+                    },
+                    child: const ReusableCard(
+                        colour: activeCardColour,
+                        cardChild: iconContent(
+                          icon: FontAwesomeIcons.mars,
+                          text: 'MALE',
+                        )),
+                  ),
                 ),
-                Expanded(child: ReusableCard(colour: activeCardColour)),
+                const Expanded(
+                    child: ReusableCard(
+                        colour: activeCardColour,
+                        cardChild: iconContent(
+                            icon: FontAwesomeIcons.venus, text: 'FEMALE'))),
               ],
             )),
             const Expanded(child: ReusableCard(colour: activeCardColour)),
