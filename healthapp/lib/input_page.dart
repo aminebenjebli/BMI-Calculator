@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/cards.dart';
+
+const activeCardColour = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
+  const InputPage({super.key});
+
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -14,40 +20,30 @@ class _InputPageState extends State<InputPage> {
         ),
         body: Column(
           children: <Widget>[
-            Expanded(
+            const Expanded(
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(colour: const Color(0xFF1D1E33)),
+                  child: ReusableCard(colour: activeCardColour),
                 ),
-                Expanded(child: ReusableCard(colour: const Color(0xFF1D1E33))),
+                Expanded(child: ReusableCard(colour: activeCardColour)),
               ],
             )),
-            Expanded(child: ReusableCard(colour: const Color(0xFF1D1E33))),
-            Expanded(
+            const Expanded(child: ReusableCard(colour: activeCardColour)),
+            const Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: const Color(0xFF1D1E33))),
-                Expanded(child: ReusableCard(colour: const Color(0xFF1D1E33))),
+                Expanded(child: ReusableCard(colour: activeCardColour)),
+                Expanded(child: ReusableCard(colour: activeCardColour)),
               ],
-            ))
+            )),
+            Container(
+              color: bottomContainerColor,
+              margin: const EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: 80.0,
+            ),
           ],
         ));
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.colour});
-  Color colour;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
   }
 }
