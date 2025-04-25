@@ -4,6 +4,7 @@ import 'package:healthapp/cards.dart';
 import 'package:healthapp/card_content.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
+const inactiveCardColour = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
@@ -14,6 +15,29 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColor = inactiveCardColour;
+  Color femaleCardColor = inactiveCardColour;
+
+  // male = 1 , female = 2
+  void updateColor(int gender) {
+    if (gender == 1) {
+      if (maleCardColor == inactiveCardColour) {
+        maleCardColor = activeCardColour;
+        femaleCardColor = inactiveCardColour;
+      } else {
+        maleCardColor = inactiveCardColour;
+      }
+    }
+    if (gender == 2) {
+      if (femaleCardColor == inactiveCardColour) {
+        femaleCardColor = activeCardColour;
+        maleCardColor = inactiveCardColour;
+      } else {
+        femaleCardColor = inactiveCardColour;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,29 +52,38 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      print("Male card was tapped");
+                      setState(() {
+                        updateColor(1);
+                      });
                     },
-                    child: const ReusableCard(
-                        colour: activeCardColour,
-                        cardChild: iconContent(
+                    child: ReusableCard(
+                        colour: maleCardColor,
+                        cardChild: const iconContent(
                           icon: FontAwesomeIcons.mars,
                           text: 'MALE',
                         )),
                   ),
                 ),
-                const Expanded(
-                    child: ReusableCard(
-                        colour: activeCardColour,
-                        cardChild: iconContent(
-                            icon: FontAwesomeIcons.venus, text: 'FEMALE'))),
+                Expanded(
+                    child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      updateColor(2);
+                    });
+                  },
+                  child: ReusableCard(
+                      colour: femaleCardColor,
+                      cardChild: const iconContent(
+                          icon: FontAwesomeIcons.venus, text: 'FEMALE')),
+                )),
               ],
             )),
-            const Expanded(child: ReusableCard(colour: activeCardColour)),
+            const Expanded(child: ReusableCard(colour: inactiveCardColour)),
             const Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: activeCardColour)),
-                Expanded(child: ReusableCard(colour: activeCardColour)),
+                Expanded(child: ReusableCard(colour: inactiveCardColour)),
+                Expanded(child: ReusableCard(colour: inactiveCardColour)),
               ],
             )),
             Container(
