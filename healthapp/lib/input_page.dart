@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthapp/cards.dart';
 import 'package:healthapp/card_content.dart';
+import 'package:healthapp/gender.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 const inactiveCardColour = Color(0xFF111328);
@@ -18,9 +19,8 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColor = inactiveCardColour;
   Color femaleCardColor = inactiveCardColour;
 
-  // male = 1 , female = 2
-  void updateColor(int gender) {
-    if (gender == 1) {
+  void updateColor(Gender selectedGender) {
+    if (selectedGender == Gender.male) {
       if (maleCardColor == inactiveCardColour) {
         maleCardColor = activeCardColour;
         femaleCardColor = inactiveCardColour;
@@ -28,7 +28,7 @@ class _InputPageState extends State<InputPage> {
         maleCardColor = inactiveCardColour;
       }
     }
-    if (gender == 2) {
+    if (selectedGender == Gender.female) {
       if (femaleCardColor == inactiveCardColour) {
         femaleCardColor = activeCardColour;
         maleCardColor = inactiveCardColour;
@@ -53,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColor(1);
+                        updateColor(Gender.male);
                       });
                     },
                     child: ReusableCard(
@@ -68,7 +68,7 @@ class _InputPageState extends State<InputPage> {
                     child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      updateColor(2);
+                      updateColor(Gender.female);
                     });
                   },
                   child: ReusableCard(
