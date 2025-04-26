@@ -4,6 +4,7 @@ import 'package:healthapp/cards.dart';
 import 'package:healthapp/card_content.dart';
 import 'package:healthapp/constants.dart';
 import 'package:healthapp/gender.dart';
+import 'package:healthapp/round_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -15,6 +16,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
+  int weight = 60;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,27 +78,77 @@ class _InputPageState extends State<InputPage> {
                       const Text('cm', style: labelTextStyle),
                     ],
                   ),
-                  Slider(
-                    value: height.toDouble(),
-                    min: 120.0,
-                    max: 220.0,
-                    activeColor: const Color(0xFFEB1555),
-                    inactiveColor: const Color(0xFF8D8E98),
-                    thumbColor: const Color(0xFFEB1555),
-                    onChanged: (double newValue) {
-                      setState(() {
-                        height = newValue.round();
-                      });
-                    },
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbColor: const Color(0xFFEB1555),
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: const Color(0xFF8D8E98),
+                      overlayColor: const Color(0x29EB1555),
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 15.0,
+                      ),
+                      overlayShape: const RoundSliderOverlayShape(
+                        overlayRadius: 30.0,
+                      ),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
                   )
                 ],
               ),
             )),
-            const Expanded(
+            Expanded(
                 child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: inactiveCardColour)),
-                Expanded(child: ReusableCard(colour: inactiveCardColour)),
+                Expanded(
+                    child: ReusableCard(
+                  colour: inactiveCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        'WEIGHT',
+                        style: labelTextStyle,
+                      ),
+                      Text(weight.toString(), style: numberTextStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPressed: () {
+                              // Decrease weight
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              // Increase weight
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )),
+                const Expanded(child: ReusableCard(colour: inactiveCardColour)),
               ],
             )),
             Container(
