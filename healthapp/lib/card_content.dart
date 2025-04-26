@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/constants.dart';
 
+// ignore: camel_case_types
 class iconContent extends StatelessWidget {
   const iconContent({
     required this.icon,
@@ -21,13 +23,7 @@ class iconContent extends StatelessWidget {
         const SizedBox(
           height: 15.0,
         ),
-        Text(
-          text,
-          style: const TextStyle(
-            color: Color(0xFF8D8E98),
-            fontSize: 18.0,
-          ),
-        )
+        Text(text, style: labelTextStyle),
       ],
     );
   }

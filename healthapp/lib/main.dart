@@ -17,8 +17,8 @@ class BMICalculator extends StatelessWidget {
         //   bodyMedium: TextStyle(color: Colors.white),
         // ),
       ),
-      home: InputPage(),
+      home: const InputPage(),
     );
   }
 }
-//126
+//128

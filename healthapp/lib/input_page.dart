@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:healthapp/cards.dart';
 import 'package:healthapp/card_content.dart';
+import 'package:healthapp/constants.dart';
 import 'package:healthapp/gender.dart';
-
-const activeCardColour = Color(0xFF1D1E33);
-const inactiveCardColour = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -16,7 +13,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender = Gender.male;
+  Gender? selectedGender;
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +22,7 @@ class _InputPageState extends State<InputPage> {
           title: const Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
                 child: Row(
@@ -61,7 +60,38 @@ class _InputPageState extends State<InputPage> {
                 )),
               ],
             )),
-            const Expanded(child: ReusableCard(colour: inactiveCardColour)),
+            Expanded(
+                child: ReusableCard(
+              colour: inactiveCardColour,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('HEIGHT', style: labelTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(height.toString(), style: numberTextStyle),
+                      const Text('cm', style: labelTextStyle),
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    activeColor: const Color(0xFFEB1555),
+                    inactiveColor: const Color(0xFF8D8E98),
+                    thumbColor: const Color(0xFFEB1555),
+                    onChanged: (double newValue) {
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
+                  )
+                ],
+              ),
+            )),
             const Expanded(
                 child: Row(
               children: <Widget>[
@@ -73,7 +103,7 @@ class _InputPageState extends State<InputPage> {
               color: bottomContainerColor,
               margin: const EdgeInsets.only(top: 10.0),
               width: double.infinity,
-              height: 80.0,
+              height: bottomContainerHeight,
             ),
           ],
         ));
