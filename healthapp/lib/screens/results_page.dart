@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthapp/widgets/bottom_button.dart';
 import 'package:healthapp/widgets/cards.dart';
 import 'package:healthapp/constants/constants.dart';
 
@@ -17,6 +18,8 @@ class ResultsPage extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Container(
+                padding: const EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
                 child: const Text('Your Result', style: titleTextStyle),
               ),
             ),
@@ -45,6 +48,12 @@ class ResultsPage extends StatelessWidget {
                 ),
               ),
             ),
+            BottomButtonNavigation(
+              buttonTitle: 'RE-CALCULATE',
+              onTap: () {
+                Navigator.pop(context);
+              },
+            )
           ],
         ));
   }

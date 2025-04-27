@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healthapp/screens/input_page.dart';
-import 'package:healthapp/screens/results_page.dart';
 
 void main() => runApp(BMICalculator());
 

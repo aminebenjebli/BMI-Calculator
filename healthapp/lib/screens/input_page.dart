@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:healthapp/screens/results_page.dart';
 import 'package:healthapp/widgets/cards.dart';
 import 'package:healthapp/widgets/card_content.dart';
 import 'package:healthapp/constants/constants.dart';
 import 'package:healthapp/models/gender.dart';
-import 'package:healthapp/screens/results_page.dart';
 import 'package:healthapp/widgets/round_button.dart';
 import 'package:healthapp/widgets/bottom_button.dart';
 
@@ -195,7 +195,16 @@ class _InputPageState extends State<InputPage> {
                 )),
               ],
             )),
-            const BottomButtonNavigation(),
+            BottomButtonNavigation(
+                buttonTitle: 'CALCULATE',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ResultsPage(),
+                    ),
+                  );
+                }),
           ],
         ));
   }
