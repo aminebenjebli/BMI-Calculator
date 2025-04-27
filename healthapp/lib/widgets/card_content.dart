@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healthapp/constants.dart';
+import 'package:healthapp/constants/constants.dart';
 
 // ignore: camel_case_types
 class iconContent extends StatelessWidget {
