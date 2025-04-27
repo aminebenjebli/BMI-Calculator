@@ -14,9 +14,11 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender? selectedGender;
+  int age = 18;
   int height = 180;
+  Gender? selectedGender;
   int weight = 60;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +66,7 @@ class _InputPageState extends State<InputPage> {
             )),
             Expanded(
                 child: ReusableCard(
-              colour: inactiveCardColour,
+              colour: activeCardColour,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -110,7 +112,7 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                     child: ReusableCard(
-                  colour: inactiveCardColour,
+                  colour: activeCardColour,
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -148,7 +150,47 @@ class _InputPageState extends State<InputPage> {
                     ],
                   ),
                 )),
-                const Expanded(child: ReusableCard(colour: inactiveCardColour)),
+                Expanded(
+                    child: ReusableCard(
+                  colour: activeCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        'AGE',
+                        style: labelTextStyle,
+                      ),
+                      Text(
+                        age.toString(),
+                        style: numberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },
+                          ),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                )),
               ],
             )),
             Container(
