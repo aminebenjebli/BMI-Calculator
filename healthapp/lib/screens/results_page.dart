@@ -4,13 +4,16 @@ import 'package:healthapp/widgets/cards.dart';
 import 'package:healthapp/constants/constants.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({super.key});
+  const ResultsPage({super.key, required this.bmiResult, required this.resultText, required this.interpretation});
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('BMI CALCULATOR'),
+        appBar:  AppBar(
+          title: const Text('BMI CALCULATOR'),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -23,7 +26,7 @@ class ResultsPage extends StatelessWidget {
                 child: const Text('Your Result', style: titleTextStyle),
               ),
             ),
-            const Expanded(
+             Expanded(
               flex: 5,
               child: ReusableCard(
                 colour: activeCardColour,
@@ -32,15 +35,15 @@ class ResultsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'NORMAL',
+                      resultText,
                       style: resultTextStyle,
                     ),
                     Text(
-                      '18.3',
+                      bmiResult,
                       style: bmiTextStyle,
                     ),
                     Text(
-                      'Your BMI is low, you should eat more.',
+                      interpretation,
                       textAlign: TextAlign.center,
                       style: bodyTextStyle,
                     ),

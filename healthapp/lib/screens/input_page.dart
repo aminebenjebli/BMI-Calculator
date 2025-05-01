@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:healthapp/calculator_brain.dart';
 import 'package:healthapp/screens/results_page.dart';
 import 'package:healthapp/widgets/cards.dart';
 import 'package:healthapp/widgets/card_content.dart';
@@ -9,16 +10,15 @@ import 'package:healthapp/widgets/round_button.dart';
 import 'package:healthapp/widgets/bottom_button.dart';
 
 class InputPage extends StatefulWidget {
-  const InputPage({super.key});
-
+  const InputPage({super.key});  
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
   int age = 18;
   int height = 180;
-  Gender? selectedGender;
   int weight = 60;
 
   @override
@@ -198,10 +198,12 @@ class _InputPageState extends State<InputPage> {
             BottomButtonNavigation(
                 buttonTitle: 'CALCULATE',
                 onTap: () {
+                  CalculatorBrain calc =
+                      CalculatorBrain(height: height, weight: weight);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ResultsPage(),
+                      builder: (context) =>  ResultsPage(bmiResult: calc.calculateBMI(), resultText: calc.getResult(), interpretation: calc.getInterpretation()),
                     ),
                   );
                 }),
